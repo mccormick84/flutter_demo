@@ -4,13 +4,20 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    var switchValue = false;
+  State<StatefulWidget> createState() {
+    return _MyApp();
+  }
+}
 
+class _MyApp extends State<MyApp> {
+  var switchValue = false;
+
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -23,7 +30,10 @@ class MyApp extends StatelessWidget {
             child: Switch(
                 value: switchValue,
                 onChanged: (value) {
-                  switchValue = value;
+                  setState(() {
+                    print(value);
+                    switchValue = value;
+                  });
                 }),
           ),
         ));
